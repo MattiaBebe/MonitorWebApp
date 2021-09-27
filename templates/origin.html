@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+{% block origine %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{{  url_for('static', filename='style.css')}}">
+</head>
+{% endblock %}
+{% block navbar %}
+<div class="topnav">
+    <a class="active" href="generale">GENERALE</a>
+    <a href="/ast">ast</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+  </div>
+{% endblock %}
+{% block content%}
+{% endblock %}
+
+</html>
