@@ -1,13 +1,17 @@
 {% extends "origin.html" %}
 {% block origine %} {{super()}}  {% endblock %}
 {% block navbar %}
-   {{  super() }}
-   <a href="accessori" class="a">ACCESSORI</a>
+<div class="topnav" id="myTopnav">
+  <a href="accessori" class="active">ACCESSORI</a>
+  <a href="generale">GENERALE</a>
+  <a href="avvitati">AVVITATI</a>
+  <a href="aste">ASTE</a>
+  <a href="javascript:void(0);" class="icon" onclick ="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
 {% endblock%}
 {% block content %}
-<form action="app.html" method="GET">
-    <button name="selezione" type="submit"> SELEZIONE </button>
-</form>
 <div>
   <table width="100%" border="3" align="center">
     <tr>

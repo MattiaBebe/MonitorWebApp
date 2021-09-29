@@ -9,6 +9,7 @@ import categorySelection as selection
 ListaOrdini = []  
 ListaAste = []
 righeTMP = None
+ListaAvvitati = []
 
 app = Flask(__name__)
 
@@ -30,10 +31,11 @@ def generale(ListaOrdini = ListaOrdini):
     return render_template('app.html', ListaOrdini = ListaOrdini)
 
 @app.route("/accessori")
-def selezione(ListaAste = ListaAste):
-    print(str(ListaAste)+"\n\n\n\n\n")
-    list.clear(ListaAste)
+def selezioneAccessori(ListaAste = ListaAste):
     ListaAste = selection.accessori(ListaOrdini)
-    print(ListaAste)
     return render_template('ast.html', ListaAste = ListaAste)
 
+@app.route("/avvitati")
+def selezioneAvvitati(ListaAvvitati = ListaAvvitati):
+    ListaAvvitati = selection.avvitati(ListaOrdini)
+    return render_template('avvitati.html', ListaAvvitati = ListaAvvitati)

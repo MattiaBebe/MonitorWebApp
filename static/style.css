@@ -43,7 +43,7 @@ body{
 
 /* Add an active class to highlight the current page */
 .topnav a.active {
-  background-color: #04AA6D;
+  background-color: #A8EB12;
   color: white;
 }
 
@@ -81,7 +81,7 @@ button:hover{
   
   /* Add a color to the active/current link */
   .topnav a.active {
-    background-color: cyan;
+    background-color: #A8EB12;
     color: white;
   }
 

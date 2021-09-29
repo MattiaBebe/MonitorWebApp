@@ -19,7 +19,15 @@
     {% endif %}
 
     {% block navbar %}
-      {{ super() }}
+      <div class="topnav" id="myTopnav">
+        <a href="avvitati" class="active">AVVITATI</a>
+        <a href="generale">GENERALE</a>
+        <a href="accessori">ACCESSORI</a>
+        <a href="aste">ASTE</a>
+        <a href="javascript:void(0);" class="icon" onclick ="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
     {% endblock %}
     {% block content %}
     <div>
@@ -41,7 +49,7 @@
           <th> TEMPO </th>
           <th> ARBID </th>
         </tr>
-          {% for ordine in ListaOrdini %}
+          {% for ordine in ListaAvvitati %}
             <tr>
               <td> {{ ordine['chiave'] }} </td>
               <td> {{ ordine['ordine'] }} </td>
