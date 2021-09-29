@@ -1,11 +1,6 @@
 {% extends "origin.html" %}
 {% block navbar %}
-<div class="topnav">
-    <a href="generale">GENERALE</a>
-    <a class="active" href="/ast">ast</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
-  </div>
+   {{  super() }}
 {% endblock%}
 {% block content %}
 <form action="app.html" method="GET">
