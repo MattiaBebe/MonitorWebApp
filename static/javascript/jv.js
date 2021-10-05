@@ -7,3 +7,21 @@ function myFunction() {
       x.className = "topnav";
     }
   }
+
+
+
+  function controlloScaduto(){
+    var data = document.getElementById("data");
+    data.style.background(red)
+    if (data.className === ""){
+       data.className += "scaduto";
+    }
+  }
+
+  function Malert(){
+    var data = document.getElementById("data");
+    data.className += "scaduto";
+    if (data.className === ""){
+       data.className += "scaduto";
+    }
+  }

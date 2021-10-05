@@ -5,6 +5,7 @@ from markupsafe import Markup
 from markupsafe import escape
 import connection as conn
 import categorySelection as selection
+from datetime import date, datetime
 
 ListaOrdini = []  
 ListaAste = []
@@ -27,15 +28,18 @@ def test(unsecure):
 
 @app.route("/generale")
 def generale(ListaOrdini = ListaOrdini):
+    today = datetime.now()
     ListaOrdini = conn.estrazioneOridini()
-    return render_template('app.html', ListaOrdini = ListaOrdini)
+    return render_template('app.html', ListaOrdini = ListaOrdini, today = today)
 
 @app.route("/accessori")
 def selezioneAccessori(ListaAste = ListaAste):
+    today = datetime.now()
     ListaAste = selection.accessori(ListaOrdini)
-    return render_template('ast.html', ListaAste = ListaAste)
+    return render_template('ast.html', ListaAste = ListaAste, today = today)
 
 @app.route("/avvitati")
 def selezioneAvvitati(ListaAvvitati = ListaAvvitati):
+    today = datetime.now()
     ListaAvvitati = selection.avvitati(ListaOrdini)
-    return render_template('avvitati.html', ListaAvvitati = ListaAvvitati)
+    return render_template('avvitati.html', ListaAvvitati = ListaAvvitati, today = today)

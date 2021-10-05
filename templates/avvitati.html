@@ -31,7 +31,7 @@
     {% endblock %}
     {% block content %}
     <div>
-      <table width="100%" border="3" align="center">
+      <table align="center">
         <tr>
           <th> CHIAVE </td>
           <th> ORDINE </td>
@@ -56,7 +56,11 @@
               <td> {{ ordine['qta'] }}</td>
               <td> {{ ordine['cance'] }}</td>
               <td> {{ ordine['errore'] }}</td>
-              <td> {{ ordine['data'] }}</td>
+              {% if ordine['data'] < today %}
+              <td class="scaduto" id="data"> {{ ordine['data'] }}</td> 
+              {% else %}
+              <td class="inTempo" id="data"> {{ ordine['data'] }}</td> 
+              {% endif %}
               <td> {{ ordine['codice'] }}</td>
               <td> {{ ordine['cliente'] }}</td>
               <td> {{ ordine['cate'] }}</td>
