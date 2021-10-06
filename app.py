@@ -11,6 +11,7 @@ ListaOrdini = []
 ListaAste = []
 righeTMP = None
 ListaAvvitati = []
+ListaDati = []
 
 app = Flask(__name__)
 
@@ -43,3 +44,8 @@ def selezioneAvvitati(ListaAvvitati = ListaAvvitati):
     today = datetime.now()
     ListaAvvitati = selection.avvitati(ListaOrdini)
     return render_template('avvitati.html', ListaAvvitati = ListaAvvitati, today = today)
+
+@app.route("/dati")
+def selezioneAvv(ListaDati = ListaDati):
+    ListaDati = conn.estrazioneDati()
+    return render_template('dati.html', ListaDati = ListaDati)

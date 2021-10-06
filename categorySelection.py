@@ -1,4 +1,4 @@
-from connection import AstList
+from connection import AstList, ListaDati
 import app as ap
 
 AccList = []
