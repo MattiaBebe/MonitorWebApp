@@ -1,0 +1,74 @@
+{% extends "origin.html" %}
+{% block origine %} {{super()}}  {% endblock %}
+{% block navbar %}
+<div class="topnav" id="myTopnav">
+  <a href="accessori" class="active">ACCESSORI</a>
+  <a href="generale">GENERALE</a>
+  <a href="avvitati">AVVITATI</a>
+  <a href="aste">ASTE</a>
+  <a href="javascript:void(0);" class="icon" onclick ="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+{% endblock%}
+{% block content %}
+<div>
+  <table align="center" width="90%">
+    <tr>
+      <th> PWER </td>
+      <th> KDAUF </td>
+      <th> KDPOS' </td>
+      <th> KUNNR </td>
+      <th> name1 </td>
+      <th> aufnr </td>
+      <th> matnr </td>
+      <th> maktx </td>
+      <th> dgltp </th>
+      <th> psmng </th>
+      <th> wemng </th>
+      <th> fevor </th>
+      <th> stato </th>
+      <th> atwrt1 </th>
+      <th> atwrt </th>
+      <th> spedi </td>
+      <th> kdmat </th>
+      <th> klabc </th>
+      <th> ntgew </th>
+      <th> stlbez </th>
+      <th> bismt </th>
+      <th> linea </th>
+      <th> aufpl </th>
+    </tr>
+      {% for ordine in ListaDati %}
+        <tr>
+            <td> {{ ordine['PWER'] }} </td>
+            <td> {{ ordine['KDAUF'] }} </td>
+            <td> {{ ordine['KDPOS'] }}</td>
+            <td> {{ ordine['KUNNR'] }}</td>
+            <td> {{ ordine['name1'] }}</td>
+            <td> {{ ordine['aufnr'] }}</td> 
+            <td> {{ ordine['matnr'] }}</td> 
+            <td> {{ ordine['maktx'] }}</td>
+            <td> {{ ordine['dgltp'] }}</td>
+            <td> {{ ordine['psmng'] }}</td>
+            <td> {{ ordine['wemng'] }}</td>
+            <td> {{ ordine['fevor'] }}</td>
+            <td> {{ ordine['stato'] }}</td>
+            <td> {{ ordine['atwrt1'] }}</td>
+            <td> {{ ordine['atwrt'] }}</td>
+            <td> {{ ordine['spedi'] }}</td>
+            <td> {{ ordine['kdmat'] }}</td>
+            <td> {{ ordine['klabc'] }}</td>
+            <td> {{ ordine['ntgew'] }}</td>
+            <td> {{ ordine['stlbez'] }}</td>
+            <td> {{ ordine['bismt'] }}</td>
+            <td> {{ ordine['linea'] }}</td>
+            <td> {{ ordine['aufpl'] }}</td>
+        </tr>
+
+      {% endfor %}
+  </table>
+</div>
+{% endblock %}
+</body>
+</html>

@@ -4,9 +4,14 @@ from flask import *
 from markupsafe import Markup
 from markupsafe import escape
 import connection as conn
+import categorySelection as selection
+from datetime import date, datetime
 
 ListaOrdini = []  
 ListaAste = []
+righeTMP = None
+ListaAvvitati = []
+ListaDati = []
 
 app = Flask(__name__)
 
@@ -22,16 +27,25 @@ def test(unsecure):
     name = "<div>THIS IS A TEST</div>"
     return f"<p>{escape(name)}</p>"
 
-print(ListaOrdini)
-
 @app.route("/generale")
 def generale(ListaOrdini = ListaOrdini):
+    today = datetime.now()
     ListaOrdini = conn.estrazioneOridini()
-    return render_template('app.html', ListaOrdini = ListaOrdini)
+    return render_template('app.html', ListaOrdini = ListaOrdini, today = today)
 
-@app.route("/ast")
-def selezione(ListaAste = ListaAste):
-    return render_template('ast.html', ListaAste = ListaAste)
+@app.route("/accessori")
+def selezioneAccessori(ListaAste = ListaAste):
+    today = datetime.now()
+    ListaAste = selection.accessori(ListaOrdini)
+    return render_template('ast.html', ListaAste = ListaAste, today = today)
 
-def test():
-    print("this is a test of the funcion call")
+@app.route("/avvitati")
+def selezioneAvvitati(ListaAvvitati = ListaAvvitati):
+    today = datetime.now()
+    ListaAvvitati = selection.avvitati(ListaOrdini)
+    return render_template('avvitati.html', ListaAvvitati = ListaAvvitati, today = today)
+
+@app.route("/dati")
+def selezioneAvv(ListaDati = ListaDati):
+    ListaDati = conn.estrazioneDati()
+    return render_template('dati.html', ListaDati = ListaDati)

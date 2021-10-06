@@ -1,18 +1,19 @@
 {% extends "origin.html" %}
+{% block origine %} {{super()}}  {% endblock %}
 {% block navbar %}
-<div class="topnav">
-    <a href="generale">GENERALE</a>
-    <a class="active" href="/ast">ast</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
-  </div>
+<div class="topnav" id="myTopnav">
+  <a href="accessori" class="active">ACCESSORI</a>
+  <a href="generale">GENERALE</a>
+  <a href="avvitati">AVVITATI</a>
+  <a href="aste">ASTE</a>
+  <a href="javascript:void(0);" class="icon" onclick ="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
 {% endblock%}
 {% block content %}
-<form action="app.html" method="GET">
-    <button name="selezione" type="submit"> SELEZIONE </button>
-</form>
 <div>
-  <table width="100%" border="3" align="center">
+  <table align="center">
     <tr>
       <th> CHIAVE </td>
       <th> ORDINE </td>
@@ -37,7 +38,11 @@
             <td> {{ ordine['qta'] }}</td>
             <td> {{ ordine['cance'] }}</td>
             <td> {{ ordine['errore'] }}</td>
-            <td> {{ ordine['data'] }}</td>
+            {% if ordine['data'] < today %}
+            <td class="scaduto" id="data"> {{ ordine['data'] }}</td> 
+            {% else %}
+            <td class="inTempo" id="data"> {{ ordine['data'] }}</td> 
+            {% endif %}
             <td> {{ ordine['codice'] }}</td>
             <td> {{ ordine['cliente'] }}</td>
             <td> {{ ordine['cate'] }}</td>
