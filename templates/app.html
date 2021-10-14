@@ -29,43 +29,26 @@
     <div>
       <table width="90%" align="center">
         <tr>
-          <th> CHIAVE </td>
-          <th> ORDINE </td>
-          <th> QUANTITA' </td>
-          <th> CANCE </td>
-          <th> ERRORE </td>
-          <th> DATA </td>
-          <th> CODICE </td>
-          <th> CLIENTE </td>
-          <th> CATE </th>
-          <th> CODCLI </th>
-          <th> VORNR </th>
-          <th> AUFPL </th>
-          <th> DIPE </th>
-          <th> TEMPO </th>
-          <th> ARBID </th>
+          <th> ORDINE </th>
+          <th> AUFNR </th>
+          <th> MATNR </td>
+          <th> MATKTX </td>
+          <th> ENMG </td>
+          <th> BDMNG </td>
+          <th> UBI2 </td>
         </tr>
           {% for ordine in ListaOrdini %}
             <tr>
-              <td> {{ ordine['chiave'] }} </td>
-              <td> {{ ordine['ordine'] }} </td>
-              <td> {{ ordine['qta'] }}</td>
-              <td> {{ ordine['cance'] }}</td>
-              <td> {{ ordine['errore'] }}</td>
-              {% if ordine['data'] < today %}
-              <td class="scaduto" id="data"> {{ ordine['data'] }}</td> 
-              {% else %}
-              <td class="inTempo" id="data"> {{ ordine['data'] }}</td> 
-              {% endif %}
-              <td> {{ ordine['codice'] }}</td>
-              <td> {{ ordine['cliente'] }}</td>
-              <td> {{ ordine['cate'] }}</td>
-              <td> {{ ordine['codcli'] }}</td>
-              <td> {{ ordine['vornr'] }}</td>
-              <td> {{ ordine['aufpl'] }}</td>
-              <td> {{ ordine['dipe'] }}</td>
-              <td> {{ ordine['tempo'] }}</td>
-              <td> {{ ordine['arbid'] }}</td>
+              {% set numeroOrdine = ordine['aufnr'] %}
+              <td><input type="button" onclick="window.location.replace('/vistaOrdine/{{ numeroOrdine }}')" value="{{ ordine['aufnr']}}" class="buttonOrd"></td>
+              <td id="{{ ordine['aufnr'] }}" name="ordine{{loop.index}}" style="display: none;"> {{ ordine['aufnr'] }} </td>
+              <td> {{ ordine['matnr'] }}</td>
+              <td> {{ ordine['matktx'] }}</td>
+              <td> {{ ordine['enmg'] }}</td>
+              <td> {{ ordine['bdmng'] }}</td>
+              <td> {{ ordine['meins'] }}</td>
+              <td> {{ ordine['ubi2'] }}</td>
+
             </tr>
           {% endfor %}
       </table>

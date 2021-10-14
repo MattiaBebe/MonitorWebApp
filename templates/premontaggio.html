@@ -1,0 +1,53 @@
+<html>
+{% extends "origin.html" %}
+{% block origine %} {{super()}}  {% endblock %}
+{% block navbar %}
+<div class="topnav" id="myTopnav">
+  <a href="/accessori" class="active">ACCESSORI</a>
+  <a href="/generale">GENERALE</a>
+  <a href="/avvitati">AVVITATI</a>
+  <a href="/aste">ASTE</a>
+  <a href="javascript:void(0);" class="icon" onclick ="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+{% endblock%}
+
+<!-- visualizzazione tabella degli ordini per i premontaggi Cate = "PRE" -->
+
+<div align="center" class="ListaDati">
+    {% block content %}
+    <div class="ricerca">
+      <div class="" style="float: left;">ricerca</div>
+      <div class="" style="float: right;">ricerca</div>
+    </div>
+    <div>
+      <table width="90%" align="center">
+        <tr>
+          <th> ORDINE </th>
+          <th> COD. MATERIALE </th>
+          <th> DESCRIZIONE MATERIALE </td>
+          <th> SCADENZA </td>
+          <th> TOTALE </td>
+          <th> RESIDUO </td>
+          <th> PESO </td>
+        </tr>
+          {% for premontaggio in ListaPre %}
+            <tr>
+              {% set numeroOrdine = premontaggio['aufnr'] %}
+              <td><input type="button" onclick="window.location.replace('/vistaOrdine/{{ numeroOrdine }}')" value="{{ premontaggio['aufnr']}}" class="buttonOrd"></td>
+              <td id="{{ premontaggio['aufnr'] }}" name="premontaggio{{loop.index}}" style="display: none;"> {{ premontaggio['aufnr'] }} </td>
+              <td> {{ premontaggio['matnr'] }}</td>
+              <td> {{ premontaggio['maktx'] }}</td>
+              <td> {{ premontaggio['dgltp'] }}</td>
+              <td> {{ premontaggio['psmng'] }}</td>
+              <td> {{ premontaggio['resi'] }}</td>
+              <td> {{ premontaggio['ntgew'] }}</td>
+            </tr>
+          {% endfor %}
+      </table>
+    </div>
+    {% endblock %}
+</div>
+
+</html>

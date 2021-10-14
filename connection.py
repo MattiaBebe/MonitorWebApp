@@ -8,6 +8,17 @@ AstList = [
     
 ]
 ListaDati = []
+ListaDatiOrdine = []
+
+DictionaryDatiOrdine = {
+    "aufnr": None,
+    "matnr": None,
+    "matktx": None,
+    "enmg": None,
+    "bdmng": None,
+    "meins": None,
+    "ubi2": None
+}
 
 def connessioneDatabase():
     conn = pyodbc.connect('Driver={SQL Server};'
@@ -23,43 +34,28 @@ def connessioneDatabase():
 
 def estrazioneOridini():
     cursor = connessioneDatabase()
-    cursor.execute('SELECT top(100) * FROM tblscarico')
+    cursor.execute('SELECT top(100) * FROM tblordini')
     righe = cursor.fetchall()
     if ap.righeTMP != righe:
         ap.righeTMP = righe
         for i in righe:
             dictionaryOrderList = {
-                                    "chiave" : None,
-                                    "ordine" : None,
-                                    "qta" : None,
-                                    "cance" : None,
-                                    "errore" : None,
-                                    "data" : None,
-                                    "codice" : None,
-                                    "cliente" : None,
-                                    "cate" : None,
-                                    "codcli" : None,
-                                    "vornr" : None,
-                                    "AUFPL" : None,
-                                    "dipe" : None,
-                                    "tempo" : None,
-                                    "ARBID" : None
+                                    "aufnr" : None,
+                                    "matnr" : None,
+                                    "matktx" : None,
+                                    "enmg" : None,
+                                    "bdmng" : None,
+                                    "meins" : None,
+                                    "ubi2" : None
                                 }
-            dictionaryOrderList["chiave"] = i[0]
-            dictionaryOrderList["ordine"] = i[1]
-            dictionaryOrderList["qta"] = i[2]
-            dictionaryOrderList["cance"] = i[3]
-            dictionaryOrderList["errore"] = i[4]
-            dictionaryOrderList["data"] = i[5]
-            dictionaryOrderList["codice"] = i[6]
-            dictionaryOrderList["cliente"] = i[7]
-            dictionaryOrderList["cate"] = i[8]
-            dictionaryOrderList["codcli"] = i[9]
-            dictionaryOrderList["vornr"] = i[10]
-            dictionaryOrderList["AUFPL"] = i[11]
-            dictionaryOrderList["dipe"] = i[12]
-            dictionaryOrderList["tempo"] = i[13]
-            dictionaryOrderList["ARBID"] = i[14]
+            dictionaryOrderList["aufnr"] = i[0]
+            dictionaryOrderList["matnr"] = i[1]
+            dictionaryOrderList["matktx"] = i[2]
+            dictionaryOrderList["enmg"] = i[3]
+            dictionaryOrderList["bdmng"] = i[4]
+            dictionaryOrderList["meins"] = i[5]
+            dictionaryOrderList["ubi2"] = i[6]
+
             OrderList.append(dictionaryOrderList)
             ap.ListaOrdini = list.copy(OrderList)
     return(OrderList)
@@ -119,3 +115,24 @@ def estrazioneDati():
             dictionaryDateList["aufpl"] = i[22]
             ListaDati.append(dictionaryDateList)
     return(ListaDati)
+
+def datiOrdine(ordine):
+    ListaDatiOrdine.clear()
+    ordine = ordine
+    cursor = connessioneDatabase()
+    query = "SELECT * FROM tblordini WHERE aufnr = "+str(ordine)+";"
+    cursor.execute(query)
+    righe = cursor.fetchall()
+    for i in righe:
+        DictionaryDatiOrdine = dict()
+        DictionaryDatiOrdine['aufnr'] = i[0]
+        DictionaryDatiOrdine['matnr'] = i[1]
+        DictionaryDatiOrdine['maktx'] = i[2]
+        DictionaryDatiOrdine['enmng'] = i[3]
+        DictionaryDatiOrdine['bdmng'] = i[4]
+        DictionaryDatiOrdine['meins'] = i[5]
+        DictionaryDatiOrdine['ubi2'] = i[6]
+        ListaDatiOrdine.append(DictionaryDatiOrdine) 
+    if(ListaDatiOrdine != ap.ListaDatiOrdine):
+        ap.ListaDatiOrdine.clear()
+        return(ListaDatiOrdine)

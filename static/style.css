@@ -147,3 +147,34 @@ td.inTempo {
 .inTempo{
   background-color: chartreuse;
 }
+
+.buttonOrd {
+  background-color: #333;
+  color : white;
+  margin: 4px;
+  padding: 6px;
+  border-radius: 10px;
+  border: solid black 3px;
+  size: 5px;
+}
+
+.buttonOrd:hover{
+  cursor: pointer;
+  background-color: #ddd;
+}
+
+table .ListaDati{
+  border: 5px solid black;
+  width: 90%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+th, td .ListaDati{
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: rgb(84, 240, 70);
+  color: black;
+  text-align: center;
+  font-size: medium;
+}

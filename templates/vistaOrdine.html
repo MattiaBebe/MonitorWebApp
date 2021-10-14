@@ -1,0 +1,38 @@
+{% extends "origin.html" %}
+{% block origine %} {{super()}}  {% endblock %}
+{% block navbar %}
+<div class="topnav" id="myTopnav">
+  <a href="/accessori" class="active">ACCESSORI</a>
+  <a href="/generale">GENERALE</a>
+  <a href="/avvitati">AVVITATI</a>
+  <a href="/aste">ASTE</a>
+  <a href="javascript:void(0);" class="icon" onclick ="myFunction()">
+    <i class="fa fa-bars"></i>
+  </a>
+</div>
+{% endblock%}
+{% block content %}
+
+ <div align="center" class="ListaDati">
+      <table>
+          <tr>
+              <th> CODICE </th>
+              <th> DESCRIZIONE </th>
+              <th> QUANTITA' </th>
+              <th> U. M </th>
+              <th> UBICAZIONE </th>
+          </tr>  
+          {% for dati in ListaDatiOrdine %}
+          <tr>
+              <td> {{ dati['matnr'] }} </td>
+              <td> {{ dati['maktx'] }}</td>
+              <td> {{ dati['bdmng'] }}</td>
+              <td> {{ dati['meins'] }}</td>
+              <td> {{ dati['ubi2'] }}</td>
+          </tr>
+          {% endfor %}
+      </table>
+ </div>
+{% endblock %}
+</body>
+</html>

@@ -1,8 +1,10 @@
 from connection import AstList, ListaDati
+import connection as conn
 import app as ap
 
 AccList = []
 AvvList = []
+ListaPremontaggi = []
 
 def accessori(ListaOrdini):
     AccList.clear()
@@ -95,3 +97,26 @@ def avvitati(ListaOrdini):
         list.clear(ap.ListaAvvitati)
         print(ap.ListaAvvitati)
         return(AvvList)
+
+
+def premontaggi():
+    cursor = conn.connessioneDatabase()
+    query = "SELECT aufnr, matnr, maktx, dgltp, psmng, wemng, (psmng - wemng) AS resi, ntgew, fevor FROM vstdatin WHERE fevor = 'PRE';"
+    query2 = "SELECT * FROM vstdatin"
+    cursor.execute(query)
+    ListaPremontaggi.clear()
+    righe = cursor.fetchall()
+    for i in righe:
+        dictionaryPremontaggi = dict()
+        dictionaryPremontaggi['aufnr'] = i[0]
+        dictionaryPremontaggi['matnr'] = i[1]
+        dictionaryPremontaggi['maktx'] = i[2]
+        dictionaryPremontaggi['dgltp'] = i[3]
+        dictionaryPremontaggi['psmng'] = i[4]
+        dictionaryPremontaggi['resi'] = i[6]
+        dictionaryPremontaggi['ntgew'] = i[7]
+        ListaPremontaggi.append(dictionaryPremontaggi)
+    if(ap.ListaPremontaggi != ListaPremontaggi):
+        ap.ListaPremontaggi = list.copy(ListaPremontaggi)
+    else:
+        None
