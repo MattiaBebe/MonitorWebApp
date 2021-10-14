@@ -6,14 +6,33 @@ from markupsafe import escape
 import connection as conn
 import categorySelection as selection
 from datetime import date, datetime
+from bokeh.plotting import figure, show, output_file, save
+from bokeh.resources import CDN
+from bokeh.embed import file_html
+
+# prepare some data
+x = [1, 2, 3, 4, 5]
+y = [6, 7, 2, 4, 5]
+
 
 ListaOrdini = []  
 ListaAste = []
 righeTMP = None
 ListaAvvitati = []
 ListaDati = []
+ListaDatiOrdine = []
+ListaPremontaggi = []
 
 app = Flask(__name__)
+
+# create a new plot with a title and axis labels
+p = figure(title="Simple line example", x_axis_label="x", y_axis_label="y")
+
+# add a line renderer with legend and line thickness
+p.line(x, y, legend_label="Temp.", line_width=2)
+
+grafico = save(p)
+visualizzazioneGrafico = show(p)
 
 @app.route("/")
 @app.route("/<name>")
@@ -45,7 +64,32 @@ def selezioneAvvitati(ListaAvvitati = ListaAvvitati):
     ListaAvvitati = selection.avvitati(ListaOrdini)
     return render_template('avvitati.html', ListaAvvitati = ListaAvvitati, today = today)
 
+#route per la vista per tabella dati 
+
 @app.route("/dati")
 def selezioneAvv(ListaDati = ListaDati):
     ListaDati = conn.estrazioneDati()
     return render_template('dati.html', ListaDati = ListaDati)
+
+#route per la visualizzazione dettagli ordine 
+
+@app.route("/vistaOrdine/<ordine>")
+def vistaOrdine(ordine, ListaDatiOrdine = ListaDatiOrdine):
+    ListaDatiOrdine = conn.datiOrdine(ordine) 
+    for i in ListaDatiOrdine:
+         i['bdmng'] = str(i['bdmng']).split('.')[0] 
+    return render_template('vistaOrdine.html', ordine = ordine, ListaDatiOrdine = ListaDatiOrdine)
+
+#route per vista dei premontaggi ISO
+
+@app.route("/premontaggio")
+def vistaPremontaggi():
+    selection.premontaggi()
+    return render_template("premontaggio.html", ListaPre = ListaPremontaggi)
+
+#routes per viste montaggi IS2, AVV, KTR, XF
+
+@app.route("/monaggio")
+def vistaMontaggio():
+
+    return render_template("montaggio.html")
