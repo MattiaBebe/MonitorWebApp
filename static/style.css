@@ -20,6 +20,26 @@ body{
   background-attachment: fixed;
 }
 
+div.contenitore{
+  display: inline-block;
+  border: 3px solid red;
+  color: white;
+}
+
+.contenuto{
+  display: inline-block;
+  padding: 5px;
+  margin-left: 15%;
+  margin-right: 15%;
+  font-size: 25px;
+}
+
+.contenitoreC{
+  display: inline-block;
+  color: white;
+  width: 100%;
+}
+
 /* Add a black background color to the top navigation */
 .topnav {
   padding: 5px;

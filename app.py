@@ -14,6 +14,7 @@ from bokeh.embed import file_html
 x = [1, 2, 3, 4, 5]
 y = [6, 7, 2, 4, 5]
 
+#dichiaro tutte le liste contenenti i dati estrapolati dal database per poi lavorarci in maniera più dinamica e veloce
 
 ListaOrdini = []  
 ListaAste = []
@@ -22,6 +23,7 @@ ListaAvvitati = []
 ListaDati = []
 ListaDatiOrdine = []
 ListaPremontaggi = []
+ListaMontaggio = []
 
 app = Flask(__name__)
 
@@ -89,7 +91,11 @@ def vistaPremontaggi():
 
 #routes per viste montaggi IS2, AVV, KTR, XF
 
-@app.route("/monaggio")
+@app.route("/montaggio")
 def vistaMontaggio():
-
-    return render_template("montaggio.html")
+    selection.datiMontaggio()
+    def definizioneCategoria():
+        categoria = request.form.get("categoria")
+        return (categoria)
+    categoria = definizioneCategoria()
+    return render_template("montaggio.html", ListaMontaggio = ListaMontaggio, categoria = categoria)

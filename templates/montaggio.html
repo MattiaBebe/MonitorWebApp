@@ -11,4 +11,69 @@
   </a>
 </div>
 {% endblock%}
+{% block content%}
+<br>
+<div width="100%" class="contenitoreC">
+<center>
+    <div class="contenuto" style="position:relative"> 
+        <center> FAMIGLIA ISO 320 </center> <br>
+        <input type="radio" id="IS2" name="IS2" onclick="check()"> IS2 <br>
+        <input type="radio" id="XF" name="XF" onclick="check2()"> XF <br>
+    </div>
+    <div class="contenuto" style="position:relative">
+        <center> FAMIGLIA AVVITATI </center> <br>
+        <input type="radio" id="AVV" name="AVV" onclick="check3()">  AVV <br>
+        <input type="radio" id="KTR" name="KTR" onclick="check4()">  KTR <br>
+    </div>
+</center>
+</div>
+<br><br>
+<input type="text" id="categoria" name="categoria" value="" style="visibility: hidden;">
+<div>
+<table align="center">
+    <tr>
+        <th>ORDINE</th>
+        <th>POS.</th>
+        <th>Codice</th>
+        <th>Descrizione</th>
+        <th>Ord. Cliente</th>
+        <th>Cod. Materiale</th>
+        <th>Descrizione Materiale</th>
+        <th>Scadenza</th>
+        <th>Totale</th>
+        <th>Residuo</th>
+        <th>Lanciato</th>
+        <th>Destinazione</th>
+        <th>Articolo Cliente</th>
+        <th>Peso</th>
+    </tr>
+    <!-- scorro la lista degli ordini relativi al montaggio e li mostro all'interno della tabella -->
+    {% for ordine in ListaMontaggio %}
+        {% if categoria.value == ordine["fevor"] %}
+            <tr>
+                {% set numeroOrdine = ordine['aufnr'] %}
+            <!-- funzione collegata ai bottoni per la visualizzazione dettagliata degli ordini in base al bottone cliccato -->
+                <td><input type="button" onclick="window.location.replace('/vistaOrdine/{{ numeroOrdine }}')" value="{{ ordine['aufnr']}}" class="buttonOrd"></td>
+                <td id="{{ ordine['aufnr'] }}" name="ordine{{loop.index}}" style="display: none;"> {{ ordine['aufnr'] }} </td>
+                <td> {{ ordine['kdpos'] }} </td>
+                <td> {{ ordine['kunnr'] }} </td>
+                <td> {{ ordine['maktx'] }} </td>
+                <td> {{ ordine['kdauf'] }} </td>
+                <td> {{ ordine['matnr'] }} </td>
+                <td> {{ ordine['maktx'] }} </td>
+                <td> {{ ordine['dgltp'] }} </td>
+                <td> {{ ordine['psmng'] }} </td>
+                <td> {{ ordine['resi'] }} </td>
+                <td> {{ ordine['stato'] }} </td>
+                <td> {{ ordine['spedi'] }} </td>
+                <td> {{ ordine['kdmat'] }} </td>
+                <td> {{ ordine['ntgew'] }} </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+
+</div>
+{% endblock %}
+</html>
 

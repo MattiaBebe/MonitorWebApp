@@ -1,10 +1,11 @@
-from connection import AstList, ListaDati
+from connection import AstList, ListaDati, ListaDatiOrdine
 import connection as conn
 import app as ap
 
 AccList = []
 AvvList = []
 ListaPremontaggi = []
+ListaMontaggio = []
 
 def accessori(ListaOrdini):
     AccList.clear()
@@ -120,3 +121,37 @@ def premontaggi():
         ap.ListaPremontaggi = list.copy(ListaPremontaggi)
     else:
         None
+
+#funzione di estrapolazione dei dati dal database relativi all'ambiente di produzione "montaggio": IS2 AVV KTR XF
+
+def datiMontaggio():
+    cursor = conn.connessioneDatabase()
+    query = "SELECT pwer, kdauf, kdpos, kunnr, name1, aufnr, matnr, maktx, dgltp, psmng, wemng, (psmng - wemng) AS resi, stato, fevor, atwrt1, atwrt, spedi,kdmat,ntgew,bismt,livello  FROM vstdatin WHERE fevor = 'IS2' OR fevor = 'KTR' OR fevor = 'XF' OR fevor = 'AVV';"
+    cursor.execute(query)
+    righe = cursor.fetchall()
+    for i in righe:
+        dictionaryListaMontaggio = dict()
+        dictionaryListaMontaggio['pwer'] = i[0]
+        dictionaryListaMontaggio['kdauf'] = i[1]
+        dictionaryListaMontaggio['kdpos'] = i[2]
+        dictionaryListaMontaggio['kunnr'] = i[3]
+        dictionaryListaMontaggio['name1'] = i[4]
+        dictionaryListaMontaggio['aufnr'] = i[5]
+        dictionaryListaMontaggio['matnr'] = i[6]
+        dictionaryListaMontaggio['maktx'] = i[7]
+        dictionaryListaMontaggio['dgltp'] = i[8]
+        dictionaryListaMontaggio['psmng'] = i[9]
+        dictionaryListaMontaggio['wemng'] = i[10]
+        dictionaryListaMontaggio['resi'] = i[11]
+        dictionaryListaMontaggio['stato'] = i[12]
+        dictionaryListaMontaggio['fevor'] = i[13]
+        dictionaryListaMontaggio['atwrt1'] = i[14]
+        dictionaryListaMontaggio['atwrt'] = i[15]
+        dictionaryListaMontaggio['spedi'] = i[16]
+        dictionaryListaMontaggio['kdmat'] = i[17]
+        dictionaryListaMontaggio['ntgew'] = i[18]
+        dictionaryListaMontaggio['bismt'] = i[19]
+        dictionaryListaMontaggio['livello'] = i[20]
+    if(ap.ListaMontaggio != ListaMontaggio):
+        ap.ListaMontaggio = list.copy(ListaMontaggio)
+    
